@@ -1363,7 +1363,7 @@
 
     async function fetchData() {
       try {
-        const url = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds/last.json?api_key=${READ_API_KEY}`;
+       const url = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds/last.json`;
         const response = await fetch(url);
         
         if (!response.ok) throw new Error("Failed to fetch");
@@ -1371,7 +1371,7 @@
         const data = await response.json();
 
         // Update values
-        updateValue("soil", data.field1, 100, "soilBar");
+        updateValue("soil", data.field1, 4095, "soilBar");
         updateValue("rain", data.field2, 30, "rainBar");
         updateValue("tilt", data.field3, 30, "tiltBar");
         updateValue("vibration", data.field4, 2, "vibBar");
@@ -1389,7 +1389,7 @@
         document.getElementById("lastUpdate").textContent = "Updated " + new Date().toLocaleTimeString();
 
         // Risk calculation
-        calculateRisk(data);
+        // calculateRisk(data);
 
       } catch (err) {
         document.getElementById("connectionStatus").textContent = "No data / Check config";
