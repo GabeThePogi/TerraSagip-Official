@@ -1140,9 +1140,9 @@
     <!-- Bottom section -->
     <div class="bottom-grid">
       <div class="info-card">
-        <h3>📍 GPS Location</h3>
+        <h3>📍 Study Site Location (Simulated GPS)</h3>
         <div class="gps-coords" id="gps">Waiting for data...</div>
-        <div class="gps-label">Latitude, Longitude</div>
+        <div class="gps-label">Manually configured coordinates — not live GPS data</div>
       </div>
 
       <div class="info-card">
@@ -1356,6 +1356,12 @@
     // Replace these with your own ThingSpeak values
     const CHANNEL_ID = "3589063";        // ← Put your Channel ID here
     const READ_API_KEY = "";    // ← Put your Read API Key here
+    
+const GPS_SIMULATION = true;
+
+const DEMO_LATITUDE = 11.772924187632132;
+const DEMO_LONGITUDE = 124.88522416891281;
+
     // ===========================================================
 
     const UPDATE_INTERVAL = 15000; // 15 seconds
@@ -1393,10 +1399,19 @@ if (data.field4 !== null &&
         updateValue("temp", data.field5, 50, "tempBar");
         updateValue("humidity", data.field6, 100, "humBar");
 
-        // GPS (if you send it as a combined string or use extra fields)
-        if (data.field7 && data.field8) {
-          document.getElementById("gps").textContent = `${data.field7}, ${data.field8}`;
-        }
+
+ // TERRASAGIP STUDY SITE LOCATION
+ if (GPS_SIMULATION) {
+   document.getElementById("gps").textContent =
+     `${DEMO_LATITUDE.toFixed(6)}° N, ${DEMO_LONGITUDE.toFixed(6)}° E`;
+ } else if (data.field7 && data.field8) {
+   document.getElementById("gps").textContent =
+     `${data.field7}, ${data.field8}`;
+ } else {
+   document.getElementById("gps").textContent =
+     "Waiting for GPS data...";
+ }
+
 
         // Status
         document.getElementById("connectionStatus").textContent = "Live";
