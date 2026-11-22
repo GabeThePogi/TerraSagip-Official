@@ -1110,7 +1110,6 @@
         </div>
         <div>
           <span class="sensor-value" id="vibration">--</span>
-          <span class="sensor-unit">g</span>
         </div>
         <div class="sensor-bar"><div class="sensor-bar-fill bar-teal" id="vibBar" style="width:0%"></div></div>
       </div>
@@ -1374,7 +1373,23 @@
         updateValue("soil", data.field1, 100, "soilBar");
         updateValue("rain", data.field2, 30, "rainBar");
         updateValue("tilt", data.field3, 30, "tiltBar");
-        updateValue("vibration", data.field4, 2, "vibBar");
+   
+if (data.field4 !== null &&
+    data.field4 !== undefined &&
+    data.field4 !== "") {
+
+  const vibrationDetected = Number(data.field4) === 1;
+
+  document.getElementById("vibration").textContent =
+    vibrationDetected ? "Detected" : "Not Detected";
+
+  document.getElementById("vibBar").style.width =
+    vibrationDetected ? "100%" : "0%";
+
+} else {
+  document.getElementById("vibration").textContent = "--";
+  document.getElementById("vibBar").style.width = "0%";
+}
         updateValue("temp", data.field5, 50, "tempBar");
         updateValue("humidity", data.field6, 100, "humBar");
 
