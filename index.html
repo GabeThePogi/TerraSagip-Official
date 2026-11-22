@@ -1078,11 +1078,11 @@
 
       <div class="sensor-card">
         <div class="sensor-header">
-          <div class="sensor-title"><span class="sensor-icon">🌧️</span> Rainfall</div>
+          <div class="sensor-title"><span class="sensor-icon">🌧️</span> Rain Sensor Wetness</div>
         </div>
         <div>
           <span class="sensor-value" id="rain">--</span>
-          <span class="sensor-unit">mm/h</span>
+        <span class="sensor-unit">%</span>
         </div>
         <div class="sensor-bar"><div class="sensor-bar-fill bar-blue" id="rainBar" style="width:0%"></div></div>
       </div>
@@ -1372,7 +1372,7 @@ const DEMO_LONGITUDE = 124.88522416891281;
         // Update values
         updateValue("soil", data.field1, 100, "soilBar");
         updateValue("rain", data.field2, 30, "rainBar");
-        updateValue("tilt", data.field3, 30, "tiltBar");
+        updateValue("tilt", data.field3, 100, "tiltBar");
    
 if (data.field4 !== null &&
     data.field4 !== undefined &&
