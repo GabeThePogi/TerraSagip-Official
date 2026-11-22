@@ -88,15 +88,15 @@
       font-size: 1.25rem;
     }
 
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--green), var(--teal));
-      display: grid;
-      place-items: center;
-      font-size: 1.1rem;
-    }
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
+}
+
 
     .nav-links {
       display: flex;
@@ -864,14 +864,19 @@
 </head>
 <body>
   <!-- NAV -->
-  <nav>
-    <div class="container nav-inner">
-      <a href="#" class="logo">
-        <div class="logo-icon">🌍</div>
-        TerraSagip
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <img src="terrasagip-logo.png"
+           alt="TerraSagip Logo"
+           class="logo-img">
+      <span>TerraSagip</span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+
         <li><a href="#features">Features</a></li>
         <li><a href="#how">How It Works</a></li>
         <li><a href="#objectives">Objectives</a></li>
