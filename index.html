@@ -1447,7 +1447,7 @@ const DEMO_LONGITUDE = 124.88522416891281;
     async function fetchData() {
       try {
        const url = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds/last.json`;
-        const response = await fetch(url);
+        const response = await fetch(url, { cache: "no-store" });
         
         if (!response.ok) throw new Error("Failed to fetch");
 
@@ -1464,7 +1464,7 @@ const DEMO_LONGITUDE = 124.88522416891281;
         updateValue("soil", data.field1, 100, "soilBar");
         updateValue("rain", data.field2, 30, "rainBar");
         updateValue("tilt", data.field3, 100, "tiltBar");
-        updateValue("accel", data.field7, 1, "accelBar");   // max ~1g for bar scale
+        updateValue("accel", data.field7, 1, "accelBar", 3);   // max ~1g for bar scale
 
         if (data.field4 !== null &&
             data.field4 !== undefined &&
@@ -1573,7 +1573,7 @@ const DEMO_LONGITUDE = 124.88522416891281;
       }
     }
 
-    function updateValue(id, value, max, barId) {
+function updateValue(id, value, max, barId, decimals = 1) {
       const el = document.getElementById(id);
       const bar = document.getElementById(barId);
       if (value === null || value === undefined || value === "") {
@@ -1582,7 +1582,13 @@ const DEMO_LONGITUDE = 124.88522416891281;
         return;
       }
       const num = parseFloat(value);
-      el.textContent = num.toFixed(1);
+      if (!Number.isFinite(num)) {
+  el.textContent = "--";
+  bar.style.width = "0%";
+  return;
+}
+
+el.textContent = num.toFixed(decimals);
       const percent = Math.min((num / max) * 100, 100);
       bar.style.width = percent + "%";
     }
